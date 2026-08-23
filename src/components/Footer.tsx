@@ -1,0 +1,110 @@
+import React from 'react';
+import { ArrowUpRight, Github, ShieldCheck, Terminal, BookOpen, Scale } from 'lucide-react';
+
+interface FooterProps {
+  onOpenBlueprint: () => void;
+  onShowToast: (msg: string, desc?: string) => void;
+}
+
+export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
+  return (
+    <footer className="w-full bg-white border-t border-slate-200/90 text-slate-900 overflow-hidden">
+      {/* Enhanced Top Utility & Navigation Row */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-100">
+        {/* Left: System Status & Core Guarantees */}
+        <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs">
+          <div className="flex items-center gap-2 text-emerald-600 font-mono font-medium">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span>21 invariant tests passing</span>
+          </div>
+
+          <span className="text-slate-300 hidden sm:inline">•</span>
+
+          <span className="font-mono text-slate-500 text-[11px]">
+            Local verification suite
+          </span>
+
+          <span className="text-slate-300 hidden sm:inline">•</span>
+
+          <span className="text-slate-500 text-[11px] font-mono">
+            Apache 2.0 / MIT Open Source
+          </span>
+        </div>
+
+        {/* Right: Clean Navigation Links */}
+        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-[13px] font-medium text-slate-600">
+          <button
+            type="button"
+            onClick={onOpenBlueprint}
+            className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer"
+          >
+            <span>55-Page Blueprint</span>
+            <ArrowUpRight size={13} className="text-slate-400" />
+          </button>
+          
+          <button
+            type="button"
+            onClick={() => onShowToast('Documentation', 'Opening NAVA developer specification and CLI reference.')}
+            className="hover:text-slate-950 transition-colors cursor-pointer"
+          >
+            Docs
+          </button>
+
+          <a
+            href="https://github.com/Aakhilshaik204/nava-agent"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer"
+          >
+            <Github size={13} className="text-slate-500" />
+            <span>GitHub</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={() => onShowToast('Open Source License', 'NAVA is licensed under Apache 2.0 & MIT.')}
+            className="hover:text-slate-950 transition-colors cursor-pointer"
+          >
+            License
+          </button>
+        </nav>
+      </div>
+
+      {/* Left-most aligned massive bottom display wordmark & Copyright Row */}
+      <div className="w-full px-4 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-12 sm:pb-16 flex flex-col justify-between gap-10 select-none">
+        <div className="flex items-baseline text-left">
+          <span className="text-[clamp(80px,18vw,260px)] font-bold tracking-tight text-slate-950 leading-[0.8] select-none">
+            Nava
+          </span>
+          <span 
+            className="inline-block w-[clamp(14px,2.6vw,40px)] h-[clamp(14px,2.6vw,40px)] bg-indigo-600 rounded-[2px] ml-[clamp(12px,2.2vw,36px)] mb-[clamp(8px,1.4vw,22px)] flex-shrink-0" 
+            aria-hidden="true" 
+          />
+        </div>
+
+        {/* Attribution and Copyright Notice */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100 text-xs text-slate-500 font-mono">
+          <div className="flex items-center gap-2 text-slate-700">
+            <span>© 2026 <strong className="text-slate-950 font-semibold">Aakhil Shaik</strong>. All rights reserved.</span>
+          </div>
+
+          <div className="flex items-center gap-3 text-[11px] text-slate-400">
+            <span>NAVA Personal Agent OS Kernel</span>
+            <span>•</span>
+            <a
+              href="https://github.com/Aakhilshaik204"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-600 hover:text-slate-950 underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              github.com/Aakhilshaik204
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

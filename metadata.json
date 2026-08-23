@@ -1,0 +1,6 @@
+{
+  "name": "NAVA Personal Agent OS",
+  "description": "Autonomous local-first Personal Agent Operating System with deterministic safety guarantees, 4-tier memory, dynamic swarms, and 21 mathematical system invariants.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
