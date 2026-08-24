@@ -9,25 +9,25 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    const commands = `pip install nava-os\npython nava_shell.py --local\nnava run "organize my project"`;
+    const commands = `pip install nava-agent\nnava --help\nnava run "audit workspace security"`;
     try {
       await navigator.clipboard.writeText(commands);
       setCopied(true);
-      onShowToast('Commands copied to clipboard', 'Ready to run in terminal.', 'success');
+      onShowToast('Commands copied to clipboard', 'Ready to run in terminal: pip install nava-agent', 'success');
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      onShowToast('Copy unavailable', 'Select the command sequence from the CLI panel.', 'warning');
+      onShowToast('Copy unavailable', 'Run: pip install nava-agent in your terminal.', 'warning');
     }
   };
 
   return (
     <section className="developer-section" id="developers">
       <div className="developer-heading">
-        <p className="field-kicker">DEVELOPER SURFACES</p>
+        <p className="field-kicker">DEVELOPER SURFACES / CLI & MCP</p>
         <h2>
           Use the OS
           <br />
-          from your own tools.
+          from your terminal or tools.
         </h2>
       </div>
 
@@ -36,12 +36,12 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
         <div className="developer-process">
           <span>
             <Terminal size={13} />
-            <span>local command</span>
+            <span>pip install nava-agent</span>
           </span>
           <ChevronRight size={14} />
           <span className="developer-process-live">
             <i />
-            <span>governed tool</span>
+            <span>governed 12-step gateway</span>
           </span>
           <ChevronRight size={14} />
           <span>scoped runtime</span>
@@ -57,23 +57,34 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
               <i />
               <i />
             </span>
-            <b>nava / local shell</b>
-            <button type="button" onClick={handleCopy} className="cursor-pointer">
+            <div className="flex items-center gap-1.5">
+              <b>nava / terminal cli</b>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-semibold">
+                v0.2.0 PyPI
+              </span>
+            </div>
+            <button type="button" onClick={handleCopy} className="cursor-pointer" title="Copy CLI Commands">
               {copied ? <Check size={14} /> : <Copy size={14} />}
               <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
           <pre>
-            <span># start Nava locally</span>
+            <span># 1. Install terminal agent from PyPI</span>
             <br />
-            <b>$</b> pip install nava-os
-            <br />
-            <b>$</b> python nava_shell.py --local
-            <br />
-            <b>$</b> nava run "organize my project"
+            <b>$</b> pip install nava-agent
             <br />
             <br />
-            <em>✓ action gateway armed</em>
+            <span># 2. Inspect available commands & agents</span>
+            <br />
+            <b>$</b> nava --help
+            <br />
+            <br />
+            <span># 3. Execute deterministic autonomous mission</span>
+            <br />
+            <b>$</b> nava run "audit workspace security"
+            <br />
+            <br />
+            <em>✓ action gateway armed • 21 invariants enforced</em>
           </pre>
         </article>
 

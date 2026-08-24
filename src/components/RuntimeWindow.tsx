@@ -390,6 +390,10 @@ export function RuntimeWindow({ onShowToast }: RuntimeWindowProps) {
       {/* Intro Header */}
       <div className="runtime-intro">
         <div>
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-mono mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            <span>UI STUDIO IN DEVELOPMENT • CLI v0.2.0 LIVE ON PyPI</span>
+          </div>
           <p className="field-kicker field-kicker--dark">NAVA / LOCAL EXECUTION RUNTIME</p>
           <h2 id="runtime-title">
             Autonomy looks better
@@ -398,8 +402,8 @@ export function RuntimeWindow({ onShowToast }: RuntimeWindowProps) {
           </h2>
         </div>
         <p className="text-slate-400 text-sm leading-relaxed max-w-md">
-          Step through live agent executions, test mathematical invariant defenses, and inspect the
-          deterministic local sandbox.
+          Interactive preview of the upcoming Desktop Studio interface. Experience how the underlying
+          deterministic kernel (now installable via <code className="text-emerald-400 font-mono">pip install nava-agent</code>) coordinates parallel swarms and enforces invariants.
         </p>
       </div>
 

@@ -13,29 +13,44 @@ export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
       <div className="w-full px-4 sm:px-8 lg:px-12 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-100">
         {/* Left: System Status & Core Guarantees */}
         <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs">
-          <div className="flex items-center gap-2 text-emerald-600 font-mono font-medium">
+          <a
+            href="https://pypi.org/project/nava-agent/0.2.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-emerald-600 font-mono font-medium hover:underline cursor-pointer"
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>21 invariant tests passing</span>
-          </div>
+            <span>nava-agent v0.2.0 on PyPI</span>
+          </a>
 
           <span className="text-slate-300 hidden sm:inline">•</span>
 
-          <span className="font-mono text-slate-500 text-[11px]">
-            Local verification suite
+          <span className="font-mono text-slate-600 text-[11px]">
+            Terminal CLI Live • UI Studio in Dev
           </span>
 
           <span className="text-slate-300 hidden sm:inline">•</span>
 
           <span className="text-slate-500 text-[11px] font-mono">
-            Apache 2.0 / MIT Open Source
+            21 Invariant Tests Passing
           </span>
         </div>
 
         {/* Right: Clean Navigation Links */}
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-[13px] font-medium text-slate-600">
+          <a
+            href="https://pypi.org/project/nava-agent/0.2.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer text-indigo-600 font-semibold"
+          >
+            <Terminal size={13} />
+            <span>PyPI (pip)</span>
+          </a>
+
           <button
             type="button"
             onClick={onOpenBlueprint}
@@ -45,14 +60,6 @@ export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
             <ArrowUpRight size={13} className="text-slate-400" />
           </button>
           
-          <button
-            type="button"
-            onClick={() => onShowToast('Documentation', 'Opening NAVA developer specification and CLI reference.')}
-            className="hover:text-slate-950 transition-colors cursor-pointer"
-          >
-            Docs
-          </button>
-
           <a
             href="https://github.com/Aakhilshaik204/nava-agent"
             target="_blank"

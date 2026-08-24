@@ -54,8 +54,18 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
         ))}
       </nav>
 
-      <div className="field-header-actions !gap-2.5">
-        <span className="field-version !text-xs !font-mono !px-2.5 !py-1">v1.0 Beta</span>
+      <div className="field-header-actions !gap-2 sm:!gap-2.5">
+        <a
+          href="https://pypi.org/project/nava-agent/0.2.0/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="field-version !text-xs !font-mono !px-2.5 !py-1 flex items-center gap-1.5 hover:!bg-slate-200 transition-colors"
+          title="View nava-agent v0.2.0 on PyPI"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+          <span>v0.2.0 PyPI</span>
+        </a>
+
         <a
           className="field-github cursor-pointer !text-xs !py-1.5 !px-3"
           href="https://github.com/Aakhilshaik204/nava-agent"
@@ -64,15 +74,28 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
           aria-label="GitHub repository"
         >
           <Github size={15} />
-          <span className="font-medium">GitHub</span>
+          <span className="font-medium hidden sm:inline">GitHub</span>
         </a>
+
         <button
-          className="field-download cursor-pointer !text-xs !py-1.5 !px-3.5"
+          className="field-download cursor-pointer !text-xs !py-1.5 !px-3"
+          type="button"
+          onClick={() => {
+            navigator.clipboard.writeText('pip install nava-agent');
+            onShowToast('Copied pip install command', 'Run: pip install nava-agent in your terminal.');
+          }}
+          title="Copy pip install nava-agent"
+        >
+          <span className="font-medium font-mono text-[11px]">pip install</span>
+        </button>
+
+        <button
+          className="cursor-pointer !text-xs !py-1.5 !px-3 text-slate-700 hover:text-slate-950 font-medium flex items-center gap-1"
           type="button"
           onClick={onOpenBlueprint}
         >
-          <span className="font-medium">Blueprint</span>
-          <ArrowUpRight size={14} />
+          <span>Blueprint</span>
+          <ArrowUpRight size={13} />
         </button>
       </div>
 

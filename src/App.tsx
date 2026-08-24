@@ -50,7 +50,10 @@ export default function App() {
       {/* Main Content */}
       <main id="top">
         {/* 1. Hero Section */}
-        <Hero onOpenBlueprint={() => setIsBlueprintOpen(true)} />
+        <Hero
+          onOpenBlueprint={() => setIsBlueprintOpen(true)}
+          onShowToast={addToast}
+        />
 
         {/* 2. Runtime Window / Live Execution Field */}
         <RuntimeWindow onShowToast={addToast} />
