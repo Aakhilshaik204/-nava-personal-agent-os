@@ -1,6 +1,6 @@
 # NAVA: Autonomous Personal Agent OS
 
-[![PyPI Version](https://img.shields.io/pypi/v/nava-agent.svg)](https://pypi.org/project/nava-agent/0.2.0/)
+[![PyPI Version](https://img.shields.io/pypi/v/nava-agent.svg)](https://pypi.org/project/nava-agent/0.2.5/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache 2.0 / MIT](https://img.shields.io/badge/License-Apache_2.0_%2F_MIT-green.svg)](LICENSE)
 
@@ -8,7 +8,7 @@ NAVA is a deterministic, multi-agent personal operating system designed for auto
 
 ---
 
-## ⚡ Terminal CLI Agent (Live on PyPI v0.2.0)
+## ⚡ Terminal CLI Agent (Live on PyPI v0.2.5)
 
 The core autonomous engine is available today as a terminal CLI agent on PyPI:
 
@@ -26,7 +26,7 @@ nava --help
 nava run "Audit local repository for secret leaks and policy violations"
 ```
 
-PyPI Release: [https://pypi.org/project/nava-agent/0.2.0/](https://pypi.org/project/nava-agent/0.2.0/)
+PyPI Release: [https://pypi.org/project/nava-agent/0.2.5/](https://pypi.org/project/nava-agent/0.2.5/)
 
 ---
 

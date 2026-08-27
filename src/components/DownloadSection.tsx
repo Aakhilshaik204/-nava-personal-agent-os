@@ -34,12 +34,12 @@ export function DownloadSection({ onOpenBlueprint, onShowToast }: DownloadSectio
           </button>
           
           <a
-            href="https://pypi.org/project/nava-agent/0.2.0/"
+            href="https://pypi.org/project/nava-agent/0.2.5/"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-pointer flex items-center gap-1.5 text-slate-300 hover:text-white font-medium text-sm transition-colors"
           >
-            <span>View on PyPI (v0.2.0)</span>
+            <span>View on PyPI (v0.2.5)</span>
             <ExternalLink size={14} />
           </a>
 

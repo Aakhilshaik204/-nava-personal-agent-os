@@ -75,7 +75,7 @@ export const DocsModal: React.FC<DocsModalProps> = ({
       id: 'quickstart',
       title: '1. Getting Started & Quickstart',
       category: 'Installation',
-      badge: 'PyPI v0.2.0',
+      badge: 'PyPI v0.2.5',
       summary: 'Prerequisites, installation via pip / pipx, environment keys, and running the agent CLI.',
       content: (
         <div className="space-y-6 text-sm text-slate-700 leading-relaxed">
@@ -663,7 +663,7 @@ security_switches:
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-slate-950 text-sm tracking-tight">NAVA Documentation</h3>
                 <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono rounded font-semibold">
-                  v0.2.0 PyPI
+                  v0.2.5 PyPI
                 </span>
               </div>
               <span className="text-xs text-slate-400 font-mono hidden sm:inline">
@@ -800,7 +800,7 @@ security_switches:
             <span>NAVA Personal Agent OS</span>
             <span>•</span>
             <a
-              href="https://pypi.org/project/nava-agent/0.2.0/"
+              href="https://pypi.org/project/nava-agent/0.2.5/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-600 hover:underline flex items-center gap-1"

@@ -58,13 +58,13 @@ export function Navbar({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
 
       <div className="field-header-actions !gap-2 sm:!gap-2.5">
         <a
-          href="https://pypi.org/project/nava-agent/0.2.0/"
+          href="https://pypi.org/project/nava-agent/0.2.5/"
           target="_blank"
           rel="noopener noreferrer"
           className="field-version !text-xs !font-mono !px-2.5 !py-1 hover:!bg-slate-200 transition-colors"
           title="View nava-agent on PyPI"
         >
-          v0.2.0
+          v0.2.5
         </a>
 
         <button
@@ -130,6 +130,19 @@ export function Navbar({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
             <span>Read Docs</span>
             <ArrowUpRight size={16} />
           </button>
+          {onOpenLicense && (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenLicense();
+              }}
+              className="cursor-pointer flex items-center justify-between text-slate-700 font-medium"
+            >
+              <span>License (Apache 2.0)</span>
+              <ArrowUpRight size={16} />
+            </button>
+          )}
           <button
             type="button"
             onClick={() => {

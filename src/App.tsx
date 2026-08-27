@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { RuntimeWindow } from './components/RuntimeWindow';
@@ -15,15 +15,46 @@ import { DeveloperSurfaces } from './components/DeveloperSurfaces';
 import { DownloadSection } from './components/DownloadSection';
 import { Footer } from './components/Footer';
 import { ToastContainer, ToastMessage } from './components/Toast';
-import { BlueprintModal } from './components/BlueprintModal';
-import { DocsModal } from './components/DocsModal';
-import { LicenseModal } from './components/LicenseModal';
+import { DocsPage } from './components/DocsPage';
+import { LicensePage } from './components/LicensePage';
+import { BlueprintPage } from './components/BlueprintPage';
 
 export default function App() {
-  const [isBlueprintOpen, setIsBlueprintOpen] = useState(false);
-  const [isDocsOpen, setIsDocsOpen] = useState(false);
-  const [isLicenseOpen, setIsLicenseOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'home' | 'docs' | 'license' | 'blueprint'>('home');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Sync hash routing e.g. #docs, #license, #blueprint, #top
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.startsWith('#docs')) {
+        setCurrentPage('docs');
+      } else if (hash.startsWith('#license')) {
+        setCurrentPage('license');
+      } else if (hash.startsWith('#blueprint')) {
+        setCurrentPage('blueprint');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  const navigateTo = (page: 'home' | 'docs' | 'license' | 'blueprint') => {
+    setCurrentPage(page);
+    if (page === 'docs') {
+      window.location.hash = '#docs';
+    } else if (page === 'license') {
+      window.location.hash = '#license';
+    } else if (page === 'blueprint') {
+      window.location.hash = '#blueprint';
+    } else {
+      window.location.hash = '#top';
+    }
+  };
 
   const addToast = (
     title: string,
@@ -43,13 +74,40 @@ export default function App() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
+  if (currentPage === 'docs') {
+    return (
+      <div className="bg-white min-h-screen">
+        <DocsPage onNavigate={navigateTo} onShowToast={addToast} />
+        <ToastContainer toasts={toasts} onDismiss={removeToast} />
+      </div>
+    );
+  }
+
+  if (currentPage === 'license') {
+    return (
+      <div className="bg-white min-h-screen">
+        <LicensePage onNavigate={navigateTo} onShowToast={addToast} />
+        <ToastContainer toasts={toasts} onDismiss={removeToast} />
+      </div>
+    );
+  }
+
+  if (currentPage === 'blueprint') {
+    return (
+      <div className="bg-white min-h-screen">
+        <BlueprintPage onNavigate={navigateTo} onShowToast={addToast} />
+        <ToastContainer toasts={toasts} onDismiss={removeToast} />
+      </div>
+    );
+  }
+
   return (
     <div className="field-page min-h-screen">
       {/* Navigation */}
       <Navbar
-        onOpenBlueprint={() => setIsBlueprintOpen(true)}
-        onOpenDocs={() => setIsDocsOpen(true)}
-        onOpenLicense={() => setIsLicenseOpen(true)}
+        onOpenBlueprint={() => navigateTo('blueprint')}
+        onOpenDocs={() => navigateTo('docs')}
+        onOpenLicense={() => navigateTo('license')}
         onShowToast={addToast}
       />
 
@@ -57,7 +115,7 @@ export default function App() {
       <main id="top">
         {/* 1. Hero Section */}
         <Hero
-          onOpenBlueprint={() => setIsBlueprintOpen(true)}
+          onOpenBlueprint={() => navigateTo('blueprint')}
           onShowToast={addToast}
         />
 
@@ -85,49 +143,31 @@ export default function App() {
         {/* 9. Statement & Product Surfaces (Gateway, Runtime, Memory Trust) */}
         <ProductSurfaces
           onShowToast={addToast}
-          onOpenBlueprint={() => setIsBlueprintOpen(true)}
+          onOpenBlueprint={() => navigateTo('blueprint')}
         />
 
         {/* 10. Invariants / Proof Console */}
         <ProofSection />
 
         {/* 11. Four-Tier Memory Statement */}
-        <MemoryStatement onOpenBlueprint={() => setIsBlueprintOpen(true)} />
+        <MemoryStatement onOpenBlueprint={() => navigateTo('blueprint')} />
 
         {/* 12. Developer Surfaces (CLI, MCP, Skill) */}
         <DeveloperSurfaces onShowToast={addToast} />
 
         {/* 13. Distribution / Downloads */}
         <DownloadSection
-          onOpenBlueprint={() => setIsBlueprintOpen(true)}
+          onOpenBlueprint={() => navigateTo('blueprint')}
           onShowToast={addToast}
         />
       </main>
 
       {/* Footer & Nava Wordmark */}
       <Footer
-        onOpenBlueprint={() => setIsBlueprintOpen(true)}
-        onOpenDocs={() => setIsDocsOpen(true)}
-        onOpenLicense={() => setIsLicenseOpen(true)}
+        onOpenBlueprint={() => navigateTo('blueprint')}
+        onOpenDocs={() => navigateTo('docs')}
+        onOpenLicense={() => navigateTo('license')}
         onShowToast={addToast}
-      />
-
-      {/* 55-Page Blueprint Interactive Explorer Modal */}
-      <BlueprintModal
-        isOpen={isBlueprintOpen}
-        onClose={() => setIsBlueprintOpen(false)}
-      />
-
-      {/* Interactive Documentation Modal */}
-      <DocsModal
-        isOpen={isDocsOpen}
-        onClose={() => setIsDocsOpen(false)}
-      />
-
-      {/* Open Source License Modal */}
-      <LicenseModal
-        isOpen={isLicenseOpen}
-        onClose={() => setIsLicenseOpen(false)}
       />
 
       {/* Interactive Toast Notifications */}
