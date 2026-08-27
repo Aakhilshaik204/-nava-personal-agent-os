@@ -3,10 +3,12 @@ import { Github, Menu, X, ChevronRight, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenBlueprint: () => void;
+  onOpenDocs: () => void;
+  onOpenLicense?: () => void;
   onShowToast: (msg: string, desc?: string) => void;
 }
 
-export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
+export function Navbar({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollTo = (id: string) => {
@@ -54,7 +56,7 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
         ))}
       </nav>
 
-      <div className="field-header-actions !gap-2.5">
+      <div className="field-header-actions !gap-2 sm:!gap-2.5">
         <a
           href="https://pypi.org/project/nava-agent/0.2.0/"
           target="_blank"
@@ -64,6 +66,15 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
         >
           v0.2.0
         </a>
+
+        <button
+          type="button"
+          onClick={onOpenDocs}
+          className="cursor-pointer !text-xs !py-1.5 !px-3 font-medium text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1"
+        >
+          <span>Docs</span>
+        </button>
+
         <a
           className="field-github cursor-pointer !text-xs !py-1.5 !px-3"
           href="https://github.com/Aakhilshaik204/nava-agent"
@@ -72,8 +83,9 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
           aria-label="GitHub repository"
         >
           <Github size={15} />
-          <span className="font-medium">GitHub</span>
+          <span className="font-medium hidden sm:inline">GitHub</span>
         </a>
+
         <button
           className="field-download cursor-pointer !text-xs !py-1.5 !px-3.5"
           type="button"
@@ -111,9 +123,20 @@ export function Navbar({ onOpenBlueprint, onShowToast }: NavbarProps) {
             type="button"
             onClick={() => {
               setMobileMenuOpen(false);
-              onOpenBlueprint();
+              onOpenDocs();
             }}
             className="cursor-pointer flex items-center justify-between text-indigo-600 font-semibold"
+          >
+            <span>Read Docs</span>
+            <ArrowUpRight size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenBlueprint();
+            }}
+            className="cursor-pointer flex items-center justify-between text-slate-700 font-semibold"
           >
             <span>Read blueprint</span>
             <ArrowUpRight size={16} />

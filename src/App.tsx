@@ -16,9 +16,13 @@ import { DownloadSection } from './components/DownloadSection';
 import { Footer } from './components/Footer';
 import { ToastContainer, ToastMessage } from './components/Toast';
 import { BlueprintModal } from './components/BlueprintModal';
+import { DocsModal } from './components/DocsModal';
+import { LicenseModal } from './components/LicenseModal';
 
 export default function App() {
   const [isBlueprintOpen, setIsBlueprintOpen] = useState(false);
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
+  const [isLicenseOpen, setIsLicenseOpen] = useState(false);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
   const addToast = (
@@ -44,6 +48,8 @@ export default function App() {
       {/* Navigation */}
       <Navbar
         onOpenBlueprint={() => setIsBlueprintOpen(true)}
+        onOpenDocs={() => setIsDocsOpen(true)}
+        onOpenLicense={() => setIsLicenseOpen(true)}
         onShowToast={addToast}
       />
 
@@ -101,6 +107,8 @@ export default function App() {
       {/* Footer & Nava Wordmark */}
       <Footer
         onOpenBlueprint={() => setIsBlueprintOpen(true)}
+        onOpenDocs={() => setIsDocsOpen(true)}
+        onOpenLicense={() => setIsLicenseOpen(true)}
         onShowToast={addToast}
       />
 
@@ -108,6 +116,18 @@ export default function App() {
       <BlueprintModal
         isOpen={isBlueprintOpen}
         onClose={() => setIsBlueprintOpen(false)}
+      />
+
+      {/* Interactive Documentation Modal */}
+      <DocsModal
+        isOpen={isDocsOpen}
+        onClose={() => setIsDocsOpen(false)}
+      />
+
+      {/* Open Source License Modal */}
+      <LicenseModal
+        isOpen={isLicenseOpen}
+        onClose={() => setIsLicenseOpen(false)}
       />
 
       {/* Interactive Toast Notifications */}

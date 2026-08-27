@@ -3,10 +3,12 @@ import { ArrowUpRight, Github, ShieldCheck, Terminal, BookOpen, Scale } from 'lu
 
 interface FooterProps {
   onOpenBlueprint: () => void;
+  onOpenDocs: () => void;
+  onOpenLicense: () => void;
   onShowToast: (msg: string, desc?: string) => void;
 }
 
-export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
+export function Footer({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast }: FooterProps) {
   return (
     <footer className="w-full bg-white border-t border-slate-200/90 text-slate-900 overflow-hidden">
       {/* Enhanced Top Utility & Navigation Row */}
@@ -53,6 +55,15 @@ export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
 
           <button
             type="button"
+            onClick={onOpenDocs}
+            className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer"
+          >
+            <BookOpen size={13} className="text-slate-400" />
+            <span>Documentation</span>
+          </button>
+
+          <button
+            type="button"
             onClick={onOpenBlueprint}
             className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer"
           >
@@ -72,10 +83,11 @@ export function Footer({ onOpenBlueprint, onShowToast }: FooterProps) {
 
           <button
             type="button"
-            onClick={() => onShowToast('Open Source License', 'NAVA is licensed under Apache 2.0 & MIT.')}
-            className="hover:text-slate-950 transition-colors cursor-pointer"
+            onClick={onOpenLicense}
+            className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer"
           >
-            License
+            <Scale size={13} className="text-slate-400" />
+            <span>License (Apache 2.0)</span>
           </button>
         </nav>
       </div>
