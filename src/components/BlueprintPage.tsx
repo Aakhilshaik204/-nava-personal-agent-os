@@ -33,8 +33,7 @@ import {
   ThumbsUp,
   ThumbsDown,
   Menu,
-  X,
-  FileText as BlueprintIcon
+  X
 } from 'lucide-react';
 
 interface BlueprintPageProps {
@@ -421,7 +420,7 @@ Risk Tiers:
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3 h-14 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -435,7 +434,7 @@ Risk Tiers:
           <span className="text-slate-300 font-mono">/</span>
 
           <span className="font-semibold text-slate-900 text-sm flex items-center gap-1.5">
-            <BlueprintIcon size={15} className="text-indigo-600" />
+            <FileText size={15} className="text-indigo-600" />
             <span>55-Page Blueprint</span>
           </span>
 
@@ -477,13 +476,13 @@ Risk Tiers:
           </button>
 
           <a
-            href="https://pypi.org/project/nava-agent/0.2.5/"
+            href="https://pypi.org/project/nava-agent/0.2.6/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>PyPI v0.2.5</span>
+            <span>PyPI v0.2.6</span>
           </a>
 
           <a
@@ -508,26 +507,10 @@ Risk Tiers:
       </header>
 
       {/* Main 3-Column Layout */}
-      <div className="flex-1 flex max-w-[1440px] w-full mx-auto">
-        {/* Left Sidebar */}
-        <aside
-          className={`fixed inset-y-0 left-0 z-30 w-72 bg-white border-r border-slate-200 pt-16 md:pt-4 pb-8 px-4 flex flex-col md:static md:w-64 lg:w-72 overflow-y-auto transition-transform duration-200 ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-          }`}
-        >
-          {/* Mobile search */}
-          <div className="mb-4 sm:hidden relative">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search blueprint..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg"
-            />
-          </div>
-
-          <div className="space-y-6 flex-1 text-xs">
+      <div className="flex-1 flex w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 1. Desktop Left Sidebar */}
+        <aside className="hidden md:block w-64 lg:w-72 shrink-0 border-r border-slate-200 pr-6 py-8 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="space-y-6 text-xs">
             {categories.map((category) => {
               const categorySections = filteredSections.filter((s) => s.category === category);
               if (categorySections.length === 0) return null;
@@ -544,10 +527,7 @@ Risk Tiers:
                         <button
                           key={sec.id}
                           type="button"
-                          onClick={() => {
-                            setActiveSectionId(sec.id);
-                            setSidebarOpen(false);
-                          }}
+                          onClick={() => setActiveSectionId(sec.id)}
                           className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer flex items-center justify-between ${
                             isActive
                               ? 'bg-slate-100 text-slate-950 font-bold'
@@ -567,12 +547,12 @@ Risk Tiers:
             })}
           </div>
 
-          {/* Sidebar Footer Link */}
-          <div className="pt-4 mt-4 border-t border-slate-100 text-xs space-y-1">
+          {/* Sidebar Footer Links */}
+          <div className="pt-4 mt-6 border-t border-slate-100 text-xs space-y-1">
             <button
               type="button"
               onClick={() => onNavigate('docs')}
-              className="w-full text-left px-2.5 py-1.5 text-slate-500 hover:text-slate-900 transition-colors flex items-center justify-between"
+              className="w-full text-left px-2.5 py-1.5 text-slate-500 hover:text-slate-900 transition-colors flex items-center justify-between cursor-pointer"
             >
               <span className="flex items-center gap-1.5">
                 <BookOpen size={13} />
@@ -583,7 +563,7 @@ Risk Tiers:
             <button
               type="button"
               onClick={() => onNavigate('license')}
-              className="w-full text-left px-2.5 py-1.5 text-slate-500 hover:text-slate-900 transition-colors flex items-center justify-between"
+              className="w-full text-left px-2.5 py-1.5 text-slate-500 hover:text-slate-900 transition-colors flex items-center justify-between cursor-pointer"
             >
               <span className="flex items-center gap-1.5">
                 <Scale size={13} />
@@ -594,8 +574,106 @@ Risk Tiers:
           </div>
         </aside>
 
-        {/* Center Blueprint Article Content */}
-        <main className="flex-1 min-w-0 py-8 px-6 sm:px-10 lg:px-12 max-w-4xl">
+        {/* 2. Mobile Off-Canvas Drawer */}
+        {sidebarOpen && (
+          <div className="md:hidden fixed inset-0 z-50 flex">
+            <div
+              className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs"
+              onClick={() => setSidebarOpen(false)}
+            />
+            <div className="relative w-80 max-w-[85vw] bg-white h-full p-6 overflow-y-auto flex flex-col justify-between shadow-2xl border-r border-slate-200 z-10">
+              <div className="space-y-6 text-xs">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="font-bold text-sm text-slate-950">55-Page Blueprint</span>
+                  <button
+                    type="button"
+                    onClick={() => setSidebarOpen(false)}
+                    className="p-1 text-slate-400 hover:text-slate-900"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <div className="relative">
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search blueprint..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg"
+                  />
+                </div>
+
+                {categories.map((category) => {
+                  const categorySections = filteredSections.filter((s) => s.category === category);
+                  if (categorySections.length === 0) return null;
+
+                  return (
+                    <div key={category} className="space-y-1">
+                      <h4 className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-wider px-2 py-1">
+                        {category}
+                      </h4>
+                      <div className="space-y-0.5">
+                        {categorySections.map((sec) => {
+                          const isActive = activeSection.id === sec.id;
+                          return (
+                            <button
+                              key={sec.id}
+                              type="button"
+                              onClick={() => {
+                                setActiveSectionId(sec.id);
+                                setSidebarOpen(false);
+                              }}
+                              className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between ${
+                                isActive
+                                  ? 'bg-slate-100 text-slate-950 font-bold'
+                                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950'
+                              }`}
+                            >
+                              <span className="truncate">{sec.title}</span>
+                              <span className="text-[9px] font-mono text-slate-400">
+                                p.{sec.pageNum}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 text-xs space-y-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    onNavigate('docs');
+                  }}
+                  className="w-full text-left px-2.5 py-1.5 text-slate-600 hover:text-slate-950 flex items-center justify-between"
+                >
+                  <span>Docs Portal</span>
+                  <ArrowUpRight size={13} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    onNavigate('license');
+                  }}
+                  className="w-full text-left px-2.5 py-1.5 text-slate-600 hover:text-slate-950 flex items-center justify-between"
+                >
+                  <span>Open Source License</span>
+                  <ArrowUpRight size={13} />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 3. Center Blueprint Content */}
+        <main className="flex-1 min-w-0 py-8 px-4 sm:px-8 lg:px-12 max-w-3xl lg:max-w-4xl">
           {/* Breadcrumb & Actions */}
           <div className="flex items-center justify-between gap-4 pb-4 border-b border-slate-100 text-xs text-slate-500">
             <div className="flex items-center gap-2">
@@ -731,9 +809,9 @@ Risk Tiers:
           </div>
         </main>
 
-        {/* Right Sidebar ("On this page") */}
-        <aside className="w-64 py-8 px-6 hidden xl:block border-l border-slate-100 text-xs">
-          <div className="sticky top-20 space-y-4">
+        {/* 4. Right Sidebar ("On this page") */}
+        <aside className="hidden xl:block w-56 lg:w-64 shrink-0 border-l border-slate-100 pl-6 py-8 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto text-xs">
+          <div className="space-y-4">
             <span className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
               On this page
             </span>
@@ -753,7 +831,7 @@ Risk Tiers:
               <button
                 type="button"
                 onClick={() => onNavigate('docs')}
-                className="text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5 cursor-pointer w-full text-left"
+                className="text-slate-500 hover:text-slate-950 transition-colors flex items-center gap-1.5 cursor-pointer w-full text-left"
               >
                 <BookOpen size={12} />
                 <span>Explore Docs Portal</span>
@@ -761,19 +839,19 @@ Risk Tiers:
               <button
                 type="button"
                 onClick={() => onNavigate('license')}
-                className="text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5 cursor-pointer w-full text-left"
+                className="text-slate-500 hover:text-slate-950 transition-colors flex items-center gap-1.5 cursor-pointer w-full text-left"
               >
                 <Scale size={12} />
                 <span>View License (Apache 2.0)</span>
               </button>
               <a
-                href="https://pypi.org/project/nava-agent/0.2.5/"
+                href="https://pypi.org/project/nava-agent/0.2.6/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5"
+                className="text-slate-500 hover:text-slate-950 transition-colors flex items-center gap-1.5"
               >
                 <ExternalLink size={12} />
-                <span>PyPI Release v0.2.5</span>
+                <span>PyPI Release v0.2.6</span>
               </a>
             </div>
           </div>

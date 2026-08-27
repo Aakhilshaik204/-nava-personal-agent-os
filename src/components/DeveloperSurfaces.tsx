@@ -60,7 +60,7 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
             <div className="flex items-center gap-1.5">
               <b>nava / terminal cli</b>
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-semibold">
-                v0.2.5 PyPI
+                v0.2.6 PyPI
               </span>
             </div>
             <button type="button" onClick={handleCopy} className="cursor-pointer" title="Copy CLI Commands">

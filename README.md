@@ -1,32 +1,32 @@
 # NAVA: Autonomous Personal Agent OS
 
-[![PyPI Version](https://img.shields.io/pypi/v/nava-agent.svg)](https://pypi.org/project/nava-agent/0.2.5/)
+[![PyPI Version](https://img.shields.io/pypi/v/nava-agent.svg)](https://pypi.org/project/nava-agent/0.2.6/)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: Apache 2.0 / MIT](https://img.shields.io/badge/License-Apache_2.0_%2F_MIT-green.svg)](LICENSE)
 
-NAVA is a deterministic, multi-agent personal operating system designed for autonomous workspace execution, secure computer use, deep research synthesis, and persistent human-AI collaboration.
+> **NAVA** (Personal Agent Operating System) is a local-first, multi-agent operating layer for autonomous workspace execution, computer use, and human-AI collaboration. Governed by a **12-Step Action Gateway**, **21 Certified System Invariants**, a **4-Tier Memory Hierarchy**, and **15 Standard MCP Servers**.
 
 ---
 
-## ⚡ Terminal CLI Agent (Live on PyPI v0.2.5)
+## ⚡ Terminal CLI Agent (Live on PyPI v0.2.6)
 
-The core autonomous engine is available today as a terminal CLI agent on PyPI:
+The terminal agent CLI and interactive TUI shell are live and published on PyPI.
 
 ```bash
+# 1. Install NAVA CLI from PyPI
 pip install nava-agent
+
+# 2. Or install globally using pipx
+pipx install nava-agent
+
+# 3. Launch interactive TUI shell
+nava
+
+# 4. Or execute single tasks directly
+nava run "Audit current repository for secret leaks and policy violations"
 ```
 
-### Quickstart
-
-```bash
-# 1. Inspect commands & registered agents
-nava --help
-
-# 2. Execute an autonomous mission
-nava run "Audit local repository for secret leaks and policy violations"
-```
-
-PyPI Release: [https://pypi.org/project/nava-agent/0.2.5/](https://pypi.org/project/nava-agent/0.2.5/)
+PyPI Release: [https://pypi.org/project/nava-agent/0.2.6/](https://pypi.org/project/nava-agent/0.2.6/)
 
 ---
 
