@@ -132,7 +132,7 @@ Every capability described in this blueprint — the AI Twin, four-tier memory, 
 5. Action Gateway: Schema Validation, Agent Identity, Permission Scope, Policy Engine, Deterministic Risk Engine, Budget Engine, Concurrency Lock, Credential Broker, HITL Decision.
 6. Execution & Sandboxing: Local Computer, Browser, Files, APIs.
 7. Observability & Audit: Pre/Post Diffing, State Snapshots, Cryptographic Receipts, Append-Only Ledger.`,
-      codeOrAxiom: 'Execution Path: Request -> Gateway [12 Steps] -> Sandbox -> Receipt -> Ledger -> Memory',
+      codeOrAxiom: 'Execution Path: Request -> Gateway [17 Steps] -> Sandbox -> Receipt -> Ledger -> Memory',
     },
     {
       id: 'sec-5',
@@ -308,28 +308,35 @@ Every loaded skill is cryptographically hashed (SHA-256). If a skill file is mod
     },
     {
       id: 'sec-19',
-      title: '19. The 12-Step Action Gateway Pipeline',
+      title: '19. The 17-Step Action Gateway Pipeline',
       pageNum: 33,
       category: 'Governance & Gateway',
-      summary: 'Mandatory 12-step sequential validation pipeline for all state-mutating actions.',
+      summary: 'Mandatory 17-step sequential validation pipeline for all state-mutating actions.',
       headings: [
-        { id: 'twelve-steps', text: '12-Step Chokepoint Architecture' },
+        { id: 'seventeen-steps', text: '17-Step Chokepoint Architecture' },
         { id: 'chokepoint-guarantee', text: 'Invariant #1 Chokepoint Guarantee' },
       ],
-      content: `The 12-Step Mutation Pipeline:
-1. Schema & Parameter Validation: Type check, payload validation.
-2. Agent Identity & TTL Verification: Verify agent is registered, running, not timed out.
-3. Permission Scope Intersection: child_scope <= parent_scope <= root_scope.
-4. Policy Engine Evaluation: Check declarative user rules and security switches.
-5. Deterministic Risk Engine: Compute blast radius risk score (0-100).
-6. Task Budget Verification: Token, step, and runtime limits.
-7. Concurrency Lock Acquisition: Shared-read or exclusive-write lock.
-8. Short-Lived Credential Broker: Ephemeral credential with 5-min TTL.
-9. HITL Decision Gate: If risk >= 50 or policy requires approval, pause and await signature.
-10. Pre-Execution State Snapshot: Capture file hash / system state for rollback.
-11. Tool Execution & Output Capture: Execute tool in sandboxed environment.
-12. Post-Execution Receipt & Ledger: Cryptographic receipt committed to nava_audit.jsonl.`,
-      codeOrAxiom: 'Action -> [Steps 1-9: Pre-Flight] -> [Step 10: Snapshot] -> [Step 11: Exec] -> [Step 12: Receipt]',
+      content: `The 17-Step Mutation Pipeline:
+0a. Emergency Kill Switch Check: Verifies out-of-band kill switch is not tripped.
+0b. Request Event Log: Emits TOOL_REQUESTED audit event to the append-only ledger.
+1. Schema & Parameter Validation: Validates input argument types and JSON-RPC schema.
+2. Agent Identity Check: Authenticates agent UUID, parent lineage, and spawn state.
+3. Agent TTL & Expiry: Enforces strict 5-minute agent lifetime ceiling.
+4. Parent Scope Check: Enforces non-increasing child scope (Child <= Parent & Policy).
+5. Permission Checker: Verifies tool exists within explicitly granted permissions.
+6. Policy Engine Evaluation: Checks declarative user rules and security switches.
+7. Additive Risk Engine: Computes blast radius risk score (LOW to CRITICAL).
+8. Task Budget Engine: Verifies and consumes token, step, and runtime quotas.
+9. Concurrency Lock Acquisition: Acquires shared-read or exclusive-write lock.
+10. Short-Lived Credential Broker: Ephemeral credential with 5-minute TTL.
+11. HITL Decision Gate: If risk >= 50 or policy requires approval, pauses for signed authorization.
+12. Pre-Execution State Snapshot: Captures pre-mutation SHA-256 hash snapshot for rollback.
+13. Sandboxed Tool Execution: Dispatches tool in sandboxed environment or via MCP.
+14. State Observation Hash: Records file hashes, exit codes, and output payloads.
+15. Post-Execution Verification: Verifies mutation integrity and 21 system invariants.
+16. Cryptographic AI Receipt: Generates immutable signed execution receipt.
+17. Lock Release & Teardown: Appends to audit ledger, releases locks, and revokes credentials.`,
+      codeOrAxiom: 'Action -> [Steps 0-11: Pre-Flight] -> [Step 12: Snapshot] -> [Step 13: Exec] -> [Steps 14-17: Post & Receipt]',
     },
     {
       id: 'sec-21',
@@ -476,13 +483,13 @@ Risk Tiers:
           </button>
 
           <a
-            href="https://pypi.org/project/nava-agent/0.2.6/"
+            href="https://pypi.org/project/nava-agent/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>PyPI v0.2.6</span>
+            <span>PyPI v0.3.1</span>
           </a>
 
           <a
@@ -845,13 +852,13 @@ Risk Tiers:
                 <span>View License (Apache 2.0)</span>
               </button>
               <a
-                href="https://pypi.org/project/nava-agent/0.2.6/"
+                href="https://pypi.org/project/nava-agent/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-500 hover:text-slate-950 transition-colors flex items-center gap-1.5"
               >
                 <ExternalLink size={12} />
-                <span>PyPI Release v0.2.6</span>
+                <span>PyPI Release v0.3.1</span>
               </a>
             </div>
           </div>

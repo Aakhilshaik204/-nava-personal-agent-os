@@ -75,7 +75,7 @@ export const DocsModal: React.FC<DocsModalProps> = ({
       id: 'quickstart',
       title: '1. Getting Started & Quickstart',
       category: 'Installation',
-      badge: 'PyPI v0.2.6',
+      badge: 'PyPI v0.3.1',
       summary: 'Prerequisites, installation via pip / pipx, environment keys, and running the agent CLI.',
       content: (
         <div className="space-y-6 text-sm text-slate-700 leading-relaxed">
@@ -372,33 +372,40 @@ export const DocsModal: React.FC<DocsModalProps> = ({
     },
     {
       id: 'action-gateway',
-      title: '5. The 12-Step Chokepoint Action Gateway',
+      title: '5. The 17-Step Chokepoint Action Gateway',
       category: 'Governance & Security',
       badge: 'Invariant #1',
-      summary: 'Mandatory 12-stage sequential validation pipeline for all state-mutating actions.',
+      summary: 'Mandatory 17-stage sequential validation pipeline for all state-mutating actions.',
       content: (
         <div className="space-y-4 text-sm text-slate-700 leading-relaxed">
           <p>
-            Every mutating action in NAVA must pass sequentially through the 12-step <code className="font-mono bg-slate-100 px-1 py-0.5 rounded">ActionGateway</code> chokepoint (<code className="font-mono text-xs">src/nava/gateway/pipeline.py</code>). No LLM prompt reasoning can bypass this choke point:
+            Every mutating action in NAVA must pass sequentially through the 17-step <code className="font-mono bg-slate-100 px-1 py-0.5 rounded">ActionGateway</code> chokepoint (<code className="font-mono text-xs">src/nava/gateway/pipeline.py</code>). No LLM prompt reasoning can bypass this choke point:
           </p>
 
           <div className="space-y-2 font-mono text-xs">
             {[
-              { num: '01', title: 'Authentication & Lineage', desc: 'Validates cryptographic signature, agent UUID, and active TTL.' },
-              { num: '02', title: 'Policy Engine (ALLOW)', desc: 'Matches action against declarative user rules & security switches.' },
-              { num: '03', title: 'Additive Risk Engine', desc: 'Computes deterministic risk score: recipient, attachment, sensitive file.' },
-              { num: '04', title: 'Task Budget Engine', desc: 'Verifies remaining token, step, runtime, and agent spawn quotas.' },
-              { num: '05', title: 'Concurrency Lock Manager', desc: 'Acquires shared read or exclusive write locks on target resources.' },
-              { num: '06', title: 'HITL Approval Gatekeeper', desc: 'Pauses high-risk operations (Score ≥ 50) for signed human approval.' },
-              { num: '07', title: 'State Observer Snapshot', desc: 'Captures pre-execution SHA-256 hash snapshot for rollback.' },
-              { num: '08', title: 'Sandboxed Tool Execution', desc: 'Dispatches tool locally or via isolated JSON-RPC MCP server.' },
-              { num: '09', title: 'Post-State Verification', desc: 'Validates output size, file path integrity, and diff validity.' },
-              { num: '10', title: 'Cryptographic Audit Receipt', desc: 'Generates immutable signed SHA-256 receipt committed to ledger.' },
-              { num: '11', title: 'Teardown & Lock Release', desc: 'Releases concurrency locks and revokes short-lived OAuth tokens.' },
-              { num: '12', title: 'Episodic Memory Sync', desc: 'Syncs task trajectory and outcome to Tier 2 episodic store.' },
+              { num: '00a', title: 'Emergency Kill Switch', desc: 'Verifies out-of-band kill switch is not tripped.' },
+              { num: '00b', title: 'Request Event Log', desc: 'Emits TOOL_REQUESTED audit event to the append-only ledger.' },
+              { num: '01', title: 'Schema Validation', desc: 'Validates input argument types and JSON-RPC parameter schemas.' },
+              { num: '02', title: 'Agent Identity Check', desc: 'Authenticates agent UUID and parent spawn lineage.' },
+              { num: '03', title: 'Agent TTL & Expiry', desc: 'Enforces strict 5-minute agent lifetime ceiling.' },
+              { num: '04', title: 'Parent Scope Check', desc: 'Enforces non-increasing child permission scope.' },
+              { num: '05', title: 'Permission Checker', desc: 'Verifies tool in declared agent permissions.' },
+              { num: '06', title: 'Policy Engine (ALLOW)', desc: 'Matches action against declarative user rules & security switches.' },
+              { num: '07', title: 'Additive Risk Engine', desc: 'Computes deterministic risk score: recipient, attachment, sensitive file.' },
+              { num: '08', title: 'Task Budget Engine', desc: 'Verifies remaining token, step, runtime, and agent spawn quotas.' },
+              { num: '09', title: 'Concurrency Lock Manager', desc: 'Acquires shared read or exclusive write locks on target resources.' },
+              { num: '10', title: 'Credential Broker Token', desc: 'Generates scoped, short-lived (5-min TTL) OAuth token.' },
+              { num: '11', title: 'HITL Gatekeeper', desc: 'Pauses high-risk operations (Score ≥ 50) for signed human approval.' },
+              { num: '12', title: 'Dry-Run & Pre-State Snapshot', desc: 'Captures pre-execution SHA-256 hash snapshot for rollback.' },
+              { num: '13', title: 'Sandboxed Tool Execution', desc: 'Dispatches tool locally or via isolated JSON-RPC MCP server.' },
+              { num: '14', title: 'State Observation Hash', desc: 'Records mutated file hashes, exit codes, and output payloads.' },
+              { num: '15', title: 'Post-Execution Verification', desc: 'Verifies mutation integrity, path validity, and 21 invariants.' },
+              { num: '16', title: 'Cryptographic Receipt', desc: 'Generates immutable signed SHA-256 receipt committed to ledger.' },
+              { num: '17', title: 'Lock Release & Teardown', desc: 'Releases concurrency locks, revokes temporary tokens, and syncs memory.' },
             ].map((st) => (
               <div key={st.num} className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-3">
-                <span className="font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px]">{st.num}</span>
+                <span className="font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px] shrink-0">{st.num}</span>
                 <div>
                   <b className="text-slate-900 text-xs block">{st.title}</b>
                   <span className="text-slate-500 text-[11px]">{st.desc}</span>
@@ -663,7 +670,7 @@ security_switches:
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-slate-950 text-sm tracking-tight">NAVA Documentation</h3>
                 <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono rounded font-semibold">
-                  v0.2.6 PyPI
+                  v0.3.1 PyPI
                 </span>
               </div>
               <span className="text-xs text-slate-400 font-mono hidden sm:inline">
@@ -800,7 +807,7 @@ security_switches:
             <span>NAVA Personal Agent OS</span>
             <span>•</span>
             <a
-              href="https://pypi.org/project/nava-agent/0.2.6/"
+              href="https://pypi.org/project/nava-agent/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-indigo-600 hover:underline flex items-center gap-1"

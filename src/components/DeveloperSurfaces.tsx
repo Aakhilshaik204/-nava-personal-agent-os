@@ -41,7 +41,7 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
           <ChevronRight size={14} />
           <span className="developer-process-live">
             <i />
-            <span>governed 12-step gateway</span>
+            <span>governed 17-step gateway</span>
           </span>
           <ChevronRight size={14} />
           <span>scoped runtime</span>
@@ -60,7 +60,7 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
             <div className="flex items-center gap-1.5">
               <b>nava / terminal cli</b>
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-semibold">
-                v0.2.6 PyPI
+                v0.3.1 PyPI
               </span>
             </div>
             <button type="button" onClick={handleCopy} className="cursor-pointer" title="Copy CLI Commands">

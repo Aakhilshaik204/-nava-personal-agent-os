@@ -72,7 +72,7 @@ Every capability described in this blueprint — the AI Twin, four-tier memory, 
 5. Action Gateway: Schema Validation, Agent Identity, Permission Scope, Policy Engine, Deterministic Risk Engine, Budget Engine, Concurrency Lock, Credential Broker, HITL Decision.
 6. Execution & Sandboxing: Local Computer, Browser, Files, APIs.
 7. Observability & Audit: Pre/Post Diffing, State Snapshots, Cryptographic Receipts, Append-Only Ledger.`,
-      codeOrAxiom: 'Execution Path: Request -> Gateway [12 Steps] -> Sandbox -> Receipt -> Ledger -> Memory',
+      codeOrAxiom: 'Execution Path: Request -> Gateway [17 Steps] -> Sandbox -> Receipt -> Ledger -> Memory',
     },
     {
       id: 'sec-5',
@@ -130,22 +130,29 @@ Key Constraints:
       title: '12. Action Gateway: The Central Trust Boundary',
       pageNum: 21,
       category: 'Governance',
-      summary: 'Mandatory 12-step choke point for all mutating actions.',
+      summary: 'Mandatory 17-step choke point for all mutating actions.',
       content: `The Action Gateway is Invariant #1: No agent — static, dynamic, or the root agent — may execute a mutating action without passing through it.
 
-12 Step Flow:
-1. Schema Validation
+17 Step Flow:
+0a. Emergency Kill Switch Check
+0b. Request Event Log
+1. Schema & Parameter Validation
 2. Agent Identity Verification
-3. Parent Scope Verification
-4. Policy Evaluation (ALLOW / APPROVAL / BLOCK)
-5. Additive Risk Evaluation
-6. Budget Engine Check
-7. Concurrency Lock Acquisition
-8. Scoped Short-Lived Credential Issuance (5 min TTL)
-9. HITL Human Authorization & Batching
-10. Dry Run & Sandboxed Execution
-11. State Diff & Domain Verification
-12. AI Receipt & Append-Only Audit Ledger`,
+3. Agent TTL Verification
+4. Parent Scope Verification
+5. Permission Checker
+6. Policy Evaluation (ALLOW / APPROVAL / BLOCK)
+7. Additive Risk Evaluation
+8. Budget Engine Check
+9. Concurrency Lock Acquisition
+10. Scoped Short-Lived Credential Issuance (5 min TTL)
+11. HITL Gatekeeper & Authorization
+12. Dry-Run & Pre-State Snapshot
+13. Sandboxed Tool Execution
+14. State Observation Hash
+15. Post-Execution Verification
+16. Cryptographic AI Receipt
+17. Lock Release & Teardown`,
       codeOrAxiom: 'No tool mutation bypasses the Action Gateway (System Invariant #1)',
     },
     {

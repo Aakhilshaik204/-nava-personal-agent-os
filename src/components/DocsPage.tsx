@@ -76,7 +76,7 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
   const copyCurrentPageMarkdown = () => {
     const article = articles.find((a) => a.id === activeArticleId);
     if (!article) return;
-    const text = `# ${article.title}\n\n${article.summary}\n\nDocumentation for NAVA Personal Agent OS (v0.2.6 on PyPI).\nRead more at https://github.com/Aakhilshaik204/nava-agent`;
+    const text = `# ${article.title}\n\n${article.summary}\n\nDocumentation for NAVA Personal Agent OS (v0.3.1 on PyPI).\nRead more at https://github.com/Aakhilshaik204/nava-agent`;
     navigator.clipboard.writeText(text);
     setPageCopied(true);
     onShowToast('Page link & summary copied', 'Ready to paste or share.', 'success');
@@ -117,7 +117,7 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
                 "NAVA can become more autonomous, but it can never become more privileged merely because it became more intelligent."
               </p>
               <p className="text-xs text-slate-600">
-                Every capability—the AI Twin, four-tier memory, dynamic Agent Factory, and parallel swarms—executes strictly inside the 12-step Action Gateway, not alongside it. Autonomy is the product; governance is the constraint that makes shipping that autonomy safe.
+                Every capability—the AI Twin, four-tier memory, dynamic Agent Factory, and parallel swarms—executes strictly inside the 17-step Action Gateway, not alongside it. Autonomy is the product; governance is the constraint that makes shipping that autonomy safe.
               </p>
             </div>
           </section>
@@ -128,7 +128,7 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
               <div className="p-4 border border-slate-200 rounded-xl bg-white space-y-1.5 shadow-xs">
                 <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
                   <ShieldCheck size={16} />
-                  <span>12-Step Action Gateway</span>
+                  <span>17-Step Action Gateway</span>
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Every mutation passes through schema check, policy evaluation, additive risk scoring, write locks, and cryptographic receipts.
@@ -175,7 +175,7 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm text-slate-900">Terminal CLI & TUI Cowork Shell</span>
                     <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-mono rounded font-semibold">
-                      v0.2.6 LIVE ON PyPI
+                      v0.3.1 LIVE ON PyPI
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 mt-1">
@@ -449,13 +449,13 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
     },
     {
       id: 'action-gateway',
-      title: 'The 12-Step Action Gateway',
+      title: 'The 17-Step Action Gateway',
       category: 'Governance & Security',
       badge: 'Invariant #1',
       summary: 'Step-by-step verification pipeline governing every mutation from authorization to cryptographic receipt.',
       headings: [
         { id: 'gateway-overview', text: 'Chokepoint Action Gateway' },
-        { id: 'step-by-step', text: 'The 12 Pipeline Steps' },
+        { id: 'step-by-step', text: 'The 17 Pipeline Steps' },
         { id: 'risk-engine', text: 'Additive Risk Scoring Engine' },
         { id: 'receipts', text: 'Cryptographic AI Receipts' },
       ],
@@ -464,29 +464,36 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
           <section id="gateway-overview" className="space-y-3">
             <h2 className="text-xl font-bold text-slate-900 tracking-tight">Chokepoint Action Gateway</h2>
             <p className="text-sm text-slate-700 leading-relaxed">
-              Invariant #1 states that <strong>100% of mutations</strong> across host filesystems, terminal shells, browsers, and external APIs must pass sequentially through the 12-step <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-xs">ActionGateway</code> pipeline (<code className="font-mono text-xs">src/nava/gateway/pipeline.py</code>).
+              Invariant #1 states that <strong>100% of mutations</strong> across host filesystems, terminal shells, browsers, and external APIs must pass sequentially through the 17-step <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-xs">ActionGateway</code> pipeline (<code className="font-mono text-xs">src/nava/gateway/pipeline.py</code>).
             </p>
           </section>
 
           <section id="step-by-step" className="space-y-4">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">The 12 Pipeline Steps</h2>
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">The 17 Pipeline Steps</h2>
             <div className="space-y-2.5">
               {[
-                { num: '01', title: 'Authentication & Lineage Check', desc: 'Verifies agent UUID, parent lineage, and active execution TTL.' },
-                { num: '02', title: 'Policy Engine Evaluation (ALLOW)', desc: 'Evaluates declarative user rules, security switches, and path boundaries.' },
-                { num: '03', title: 'Additive Risk Engine', desc: 'Calculates mathematical blast radius on system, filesystem, and external networks.' },
-                { num: '04', title: 'Task Budget & Quota Check', desc: 'Verifies token ceilings, step limits, spawn depth, and retry tripwires.' },
-                { num: '05', title: 'Concurrency Lock Manager', desc: 'Acquires exclusive write lock or shared read locks on target resources.' },
-                { num: '06', title: 'HITL Human Approval Gate', desc: 'Pauses execution for signed user authorization if Risk Score ≥ 50.' },
-                { num: '07', title: 'State Observer Snapshot', desc: 'Captures pre-mutation SHA-256 hash snapshot for rollback.' },
-                { num: '08', title: 'Sandboxed Tool Dispatch', desc: 'Dispatches tool locally or to isolated JSON-RPC MCP server.' },
-                { num: '09', title: 'Post-State Observation & Verification', desc: 'Inspects mutated output, path validity, and AST soundness.' },
-                { num: '10', title: 'Cryptographic AI Receipt Generation', desc: 'Issues immutable signed SHA-256 receipt committed to SQLite.' },
-                { num: '11', title: 'Teardown & Lock Release', desc: 'Releases concurrency locks and revokes short-lived 5-min credentials.' },
-                { num: '12', title: 'Episodic Memory Sync', desc: 'Syncs task trajectory, learnings, and diffs to Tier 2 episodic store.' },
+                { num: '00a', title: 'Emergency Kill Switch Check', desc: 'Verifies out-of-band kill switch is not tripped before processing.' },
+                { num: '00b', title: 'Request Event Log', desc: 'Emits TOOL_REQUESTED audit event to the append-only ledger.' },
+                { num: '01', title: 'Schema & Type Validation', desc: 'Validates input argument types and JSON-RPC parameter schemas.' },
+                { num: '02', title: 'Agent Identity Check', desc: 'Authenticates agent UUID, parent lineage, and spawn credentials.' },
+                { num: '03', title: 'Agent TTL & Expiry', desc: 'Enforces strict 5-minute agent lifetime ceiling and expiration.' },
+                { num: '04', title: 'Parent Scope Check', desc: 'Enforces non-increasing child scope (Child <= Parent & Policy).' },
+                { num: '05', title: 'Permission Checker', desc: 'Verifies tool exists within explicitly granted agent permissions.' },
+                { num: '06', title: 'Policy Engine Evaluation (ALLOW)', desc: 'Evaluates declarative user rules, security switches, and path boundaries.' },
+                { num: '07', title: 'Additive Risk Engine', desc: 'Calculates mathematical blast radius risk score (LOW to CRITICAL tier).' },
+                { num: '08', title: 'Task Budget & Quota Engine', desc: 'Verifies and consumes token ceilings, step limits, and retry tripwires.' },
+                { num: '09', title: 'Concurrency Lock Manager', desc: 'Acquires exclusive write lock or shared read locks on target resources.' },
+                { num: '10', title: 'Credential Broker Token', desc: 'Generates scoped, short-lived (5-min TTL) OAuth token for tool dispatch.' },
+                { num: '11', title: 'HITL Gatekeeper', desc: 'Pauses execution for signed user authorization if Risk Score ≥ 50 or policy requires.' },
+                { num: '12', title: 'Dry-Run & Pre-State Snapshot', desc: 'Captures pre-mutation SHA-256 hash snapshot for automatic rollback.' },
+                { num: '13', title: 'Sandboxed Tool Dispatch', desc: 'Dispatches tool locally or to isolated JSON-RPC MCP server.' },
+                { num: '14', title: 'State Observation Hash', desc: 'Records mutated file hashes, exit codes, and output payloads.' },
+                { num: '15', title: 'Post-Execution Verification', desc: 'Verifies output integrity, path validity, and 21 system invariants.' },
+                { num: '16', title: 'Cryptographic AI Receipt', desc: 'Issues immutable signed SHA-256 receipt committed to SQLite & audit ledger.' },
+                { num: '17', title: 'Lock Release & Teardown', desc: 'Releases concurrency locks, revokes temporary tokens, and syncs episodic memory.' },
               ].map((st) => (
                 <div key={st.num} className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-3 text-xs">
-                  <span className="font-mono font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                  <span className="font-mono font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200 shrink-0">
                     Step {st.num}
                   </span>
                   <div>
@@ -775,7 +782,7 @@ security_switches:
           </span>
 
           <span className="hidden md:inline-flex px-2 py-0.5 bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-mono rounded font-medium">
-            v0.2.6
+            v0.3.1
           </span>
         </div>
 
@@ -812,13 +819,13 @@ security_switches:
           </button>
 
           <a
-            href="https://pypi.org/project/nava-agent/0.2.6/"
+            href="https://pypi.org/project/nava-agent/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>PyPI v0.2.6</span>
+            <span>PyPI v0.3.1</span>
           </a>
 
           <a

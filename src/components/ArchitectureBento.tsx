@@ -24,7 +24,7 @@ export const ArchitectureBento: React.FC = () => {
           System Architecture
         </h2>
         <p className="text-slate-600 text-sm leading-relaxed">
-          Four foundational pillars and a deterministic 12-step Action Gateway.
+          Four foundational pillars and a deterministic 17-step Action Gateway.
         </p>
       </div>
 
@@ -35,7 +35,7 @@ export const ArchitectureBento: React.FC = () => {
             <ShieldCheck className="w-4 h-4" />
           </div>
           <h3 className="font-display font-bold text-sm text-slate-900">
-            12-Step Action Gateway
+            17-Step Action Gateway
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             Single mandatory choke point for all tool calls, deterministic risk scoring, and scope enforcement.
@@ -79,24 +79,24 @@ export const ArchitectureBento: React.FC = () => {
         </div>
       </div>
 
-      {/* Interactive 12-Step Action Gateway Pipeline */}
+      {/* Interactive 17-Step Action Gateway Pipeline */}
       <div className="p-6 bg-white rounded-xl border border-slate-200 shadow-2xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
           <div>
             <h3 className="font-display font-bold text-base text-slate-900">
-              The 12-Step Action Gateway Pipeline
+              The 17-Step Action Gateway Pipeline
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Click any step to inspect its deterministic rule and fail-safe policy.
             </p>
           </div>
           <span className="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 text-slate-700 border border-slate-200 self-start">
-            Step {selectedGatewayStep} of 12
+            Step {selectedGatewayStep} of 17
           </span>
         </div>
 
         {/* Horizontal Step Selector */}
-        <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5 bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+        <div className="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-18 gap-1.5 bg-slate-50 p-1.5 rounded-lg border border-slate-200">
           {GATEWAY_STEPS.map((s) => (
             <button
               key={s.stepNumber}

@@ -58,13 +58,13 @@ export function Navbar({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
 
       <div className="field-header-actions !gap-2 sm:!gap-2.5">
         <a
-          href="https://pypi.org/project/nava-agent/0.2.6/"
+          href="https://pypi.org/project/nava-agent/"
           target="_blank"
           rel="noopener noreferrer"
           className="field-version !text-xs !font-mono !px-2.5 !py-1 hover:!bg-slate-200 transition-colors"
           title="View nava-agent on PyPI"
         >
-          v0.2.6
+          v0.3.1
         </a>
 
         <button

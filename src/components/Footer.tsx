@@ -16,7 +16,7 @@ export function Footer({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
         {/* Left: System Status & Core Guarantees */}
         <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs">
           <a
-            href="https://pypi.org/project/nava-agent/0.2.6/"
+            href="https://pypi.org/project/nava-agent/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-emerald-600 font-mono font-medium hover:underline cursor-pointer"
@@ -25,7 +25,7 @@ export function Footer({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>nava-agent v0.2.6 on PyPI</span>
+            <span>nava-agent v0.3.1 on PyPI</span>
           </a>
 
           <span className="text-slate-300 hidden sm:inline">•</span>
@@ -44,7 +44,7 @@ export function Footer({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
         {/* Right: Clean Navigation Links */}
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-[13px] font-medium text-slate-600">
           <a
-            href="https://pypi.org/project/nava-agent/0.2.6/"
+            href="https://pypi.org/project/nava-agent/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-slate-950 transition-colors cursor-pointer text-indigo-600 font-semibold"

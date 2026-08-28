@@ -43,7 +43,7 @@ const FILES: WorkspaceFile[] = [
 
 ## 1. Architectural Invariants
 - Runtime must execute local-first under Ollama/vLLM.
-- All mutating tool executions MUST route through 12-Step Action Gateway.
+- All mutating tool executions MUST route through 17-Step Action Gateway.
 - Dynamic Subagent spawn ceiling is hard-capped at MAX_DEPTH = 3.
 
 ## 2. Tech Stack & Style Conventions

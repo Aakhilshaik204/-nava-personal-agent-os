@@ -227,7 +227,7 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
             className="cursor-pointer flex items-center gap-1.5 font-semibold text-sm text-slate-900 hover:text-indigo-600 transition-colors"
             onClick={() => setActiveTab('gateway')}
           >
-            <span>Inspect 10-Point Action Gateway</span>
+            <span>Inspect 17-Step Action Gateway</span>
             <ArrowUpRight size={15} />
           </button>
         </div>
@@ -246,7 +246,7 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
             onClick={() => setActiveTab('gateway')}
           >
             <LockKeyhole size={14} />
-            <span>Action Gateway (10-Point Pipeline)</span>
+            <span>Action Gateway (17-Step Pipeline)</span>
           </button>
           <button
             type="button"
