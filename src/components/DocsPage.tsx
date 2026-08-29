@@ -34,7 +34,8 @@ import {
   ThumbsUp,
   ThumbsDown,
   Menu,
-  X
+  X,
+  Network
 } from 'lucide-react';
 
 interface DocsPageProps {
