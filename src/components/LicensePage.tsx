@@ -204,7 +204,7 @@ export function LicensePage({ onNavigate, onShowToast }: LicensePageProps) {
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>v0.3.1 PyPI</span>
+            <span>v0.3.3 PyPI</span>
           </a>
 
           <a

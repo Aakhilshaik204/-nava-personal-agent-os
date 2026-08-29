@@ -489,7 +489,7 @@ Risk Tiers:
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>PyPI v0.3.1</span>
+            <span>PyPI v0.3.3</span>
           </a>
 
           <a
@@ -858,7 +858,7 @@ Risk Tiers:
                 className="text-slate-500 hover:text-slate-950 transition-colors flex items-center gap-1.5"
               >
                 <ExternalLink size={12} />
-                <span>PyPI Release v0.3.1</span>
+                <span>PyPI Release v0.3.3</span>
               </a>
             </div>
           </div>

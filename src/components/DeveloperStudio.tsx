@@ -33,14 +33,11 @@ export const DeveloperStudio: React.FC = () => {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  const cliCode = `# Install NAVA OS Daemon & CLI
-pip install nava-os
+  const cliCode = `# Install NAVA CLI from PyPI
+pip install nava-agent
 
-# Initialize Local Vault & Qdrant Engine
-nava init --local-first
-
-# Launch Task behind Action Gateway
-nava run --goal "Audit local repository for CVEs and prepare PR"`;
+# Launch personal agent OS
+nava`;
 
   const pythonSdkCode = `from nava.core import NavaRuntime, TaskBudget
 

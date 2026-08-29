@@ -75,8 +75,8 @@ export const DocsModal: React.FC<DocsModalProps> = ({
       id: 'quickstart',
       title: '1. Getting Started & Quickstart',
       category: 'Installation',
-      badge: 'PyPI v0.3.1',
-      summary: 'Prerequisites, installation via pip / pipx, environment keys, and running the agent CLI.',
+      badge: 'PyPI v0.3.3',
+      summary: 'Prerequisites, installation via pip, environment keys, and running the agent CLI.',
       content: (
         <div className="space-y-6 text-sm text-slate-700 leading-relaxed">
           <p>
@@ -86,15 +86,15 @@ export const DocsModal: React.FC<DocsModalProps> = ({
           <div className="space-y-3">
             <h4 className="font-bold text-slate-900 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              Installation Methods
+              Installation
             </h4>
             
             <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs relative overflow-hidden border border-slate-800">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400">
-                <span>Standard pip / pipx install</span>
+                <span>Terminal / Command Line</span>
                 <button
                   type="button"
-                  onClick={() => copyToClipboard('pip install nava-agent\nplaywright install chromium', 'inst-pip')}
+                  onClick={() => copyToClipboard('pip install nava-agent', 'inst-pip')}
                   className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer text-[11px]"
                 >
                   {copiedCodeId === 'inst-pip' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
@@ -103,23 +103,16 @@ export const DocsModal: React.FC<DocsModalProps> = ({
               </div>
               <pre className="text-slate-300">
                 <span className="text-slate-500"># Install from PyPI</span>{'\n'}
-                <b className="text-white">pip install nava-agent</b>{'\n\n'}
-                <span className="text-slate-500"># Or install as global isolated CLI tool via pipx</span>{'\n'}
-                <b className="text-white">pipx install nava-agent</b>{'\n\n'}
-                <span className="text-slate-500"># Install headless Chromium for BrowserAgent</span>{'\n'}
-                <b className="text-white">playwright install chromium</b>
+                <b className="text-white">pip install nava-agent</b>
               </pre>
             </div>
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-bold text-slate-900">Environment Configuration</h4>
-            <p className="text-xs text-slate-600">
-              Set your Gemini API key (or OpenAI / Anthropic / Local Ollama endpoint) in your shell environment:
-            </p>
-            <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs border border-slate-800">
+            <h4 className="font-bold text-slate-900">API Key Configuration</h4>
+            <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs relative overflow-hidden border border-slate-800">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400">
-                <span>API Keys & Environment</span>
+                <span>Environment Variable</span>
                 <button
                   type="button"
                   onClick={() => copyToClipboard('export GEMINI_API_KEY="your_api_key_here"', 'inst-env')}
@@ -142,10 +135,8 @@ export const DocsModal: React.FC<DocsModalProps> = ({
             <h4 className="font-bold text-slate-900">Running the Agent</h4>
             <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs border border-slate-800">
               <pre className="text-slate-300">
-                <span className="text-slate-500"># 1. Launch interactive TUI Cowork Shell</span>{'\n'}
-                <b className="text-indigo-300">nava</b>{'\n\n'}
-                <span className="text-slate-500"># 2. Or execute a direct autonomous mission</span>{'\n'}
-                <b className="text-indigo-300">nava run "audit project security and summarize in typst report"</b>
+                <span className="text-slate-500"># Launch personal agent OS</span>{'\n'}
+                <b className="text-indigo-300">nava</b>
               </pre>
             </div>
           </div>
@@ -670,7 +661,7 @@ security_switches:
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-slate-950 text-sm tracking-tight">NAVA Documentation</h3>
                 <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono rounded font-semibold">
-                  v0.3.1 PyPI
+                  v0.3.3 PyPI
                 </span>
               </div>
               <span className="text-xs text-slate-400 font-mono hidden sm:inline">

@@ -76,7 +76,7 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
   const copyCurrentPageMarkdown = () => {
     const article = articles.find((a) => a.id === activeArticleId);
     if (!article) return;
-    const text = `# ${article.title}\n\n${article.summary}\n\nDocumentation for NAVA Personal Agent OS (v0.3.1 on PyPI).\nRead more at https://github.com/Aakhilshaik204/nava-agent`;
+    const text = `# ${article.title}\n\n${article.summary}\n\nDocumentation for NAVA Personal Agent OS (v0.3.3 on PyPI).\nRead more at https://github.com/Aakhilshaik204/nava-agent`;
     navigator.clipboard.writeText(text);
     setPageCopied(true);
     onShowToast('Page link & summary copied', 'Ready to paste or share.', 'success');
@@ -147,21 +147,21 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
 
               <div className="p-4 border border-slate-200 rounded-xl bg-white space-y-1.5 shadow-xs">
                 <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
-                  <Server size={16} />
-                  <span>15-Server MCP Ecosystem</span>
+                  <Cpu size={16} />
+                  <span>Dynamic Swarms & Factory</span>
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Standard Model Context Protocol integration across Git, Typst, ArXiv, SQLite, Playwright, and AST refactor servers.
+                  Just-in-time dynamic subagents with non-increasing permissions (Child &le; Parent &cap; Policy) and strict MAX_DEPTH = 10 bounding.
                 </p>
               </div>
 
               <div className="p-4 border border-slate-200 rounded-xl bg-white space-y-1.5 shadow-xs">
                 <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
-                  <Cpu size={16} />
-                  <span>21 Certified Invariants</span>
+                  <Network size={16} />
+                  <span>15 MCP Servers Ecosystem</span>
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Mathematical safety bounds (depth limits, loop tripwires, 5-min credential TTLs, emergency kill switch) enforced via CI.
+                  Standard Model Context Protocol JSON-RPC tool suite: Playwright, Computer Use, Typst, ArXiv, SQLite, Git, Docker, and AST tools.
                 </p>
               </div>
             </div>
@@ -175,11 +175,11 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm text-slate-900">Terminal CLI & TUI Cowork Shell</span>
                     <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-mono rounded font-semibold">
-                      v0.3.1 LIVE ON PyPI
+                      v0.3.3 LIVE ON PyPI
                     </span>
                   </div>
                   <p className="text-xs text-slate-600 mt-1">
-                    Install with <code className="font-mono text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">pip install nava-agent</code>. Execute single-command missions with <code className="font-mono text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">nava run "..."</code> or launch the interactive TUI with <code className="font-mono text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">nava</code>.
+                    Install with <code className="font-mono text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">pip install nava-agent</code> and launch with <code className="font-mono text-slate-900 bg-white px-1.5 py-0.5 rounded border border-slate-200">nava</code>.
                   </p>
                 </div>
               </div>
@@ -206,13 +206,12 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
       id: 'quickstart',
       title: 'Quickstart & Installation',
       category: 'Getting started',
-      summary: 'Get up and running with NAVA in less than 2 minutes using pip, pipx, or from source.',
+      summary: 'Get up and running with NAVA in seconds using pip.',
       headings: [
         { id: 'prerequisites', text: 'Prerequisites' },
         { id: 'install-pypi', text: 'Installation (PyPI)' },
-        { id: 'install-source', text: 'Installation (From Source)' },
         { id: 'api-keys', text: 'Configure API Keys' },
-        { id: 'first-mission', text: 'Run Your First Mission' },
+        { id: 'first-mission', text: 'Run NAVA' },
       ],
       content: (
         <div className="space-y-8">
@@ -220,8 +219,6 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
             <h2 className="text-xl font-bold text-slate-900 tracking-tight">Prerequisites</h2>
             <ul className="list-disc pl-5 space-y-1 text-sm text-slate-700">
               <li><strong>Python 3.10+</strong> (Check with <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-xs">python --version</code>)</li>
-              <li><strong>Node.js / npx</strong> (Required for NPM MCP servers like <code className="font-mono text-xs">@context7/mcp-server</code>)</li>
-              <li><strong>uv / uvx</strong> (Recommended for fast zero-install Python MCP tools)</li>
               <li><strong>Gemini API Key</strong> (or local OpenAI-compatible endpoint like Ollama/vLLM)</li>
             </ul>
           </section>
@@ -234,10 +231,10 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
             
             <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs border border-slate-800">
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400">
-                <span>Terminal / Bash</span>
+                <span>Terminal / Command Line</span>
                 <button
                   type="button"
-                  onClick={() => copyToClipboard('pip install nava-agent\nplaywright install chromium', 'pypi-cmd')}
+                  onClick={() => copyToClipboard('pip install nava-agent', 'pypi-cmd')}
                   className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer text-[11px]"
                 >
                   {copiedCodeId === 'pypi-cmd' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
@@ -245,12 +242,8 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
                 </button>
               </div>
               <pre className="text-slate-300">
-                <span className="text-slate-500"># 1. Install nava-agent package</span>{'\n'}
-                <b className="text-white">pip install nava-agent</b>{'\n\n'}
-                <span className="text-slate-500"># 2. (Optional) Install global CLI with pipx</span>{'\n'}
-                <b className="text-white">pipx install nava-agent</b>{'\n\n'}
-                <span className="text-slate-500"># 3. Install browser binaries for Playwright web agent</span>{'\n'}
-                <b className="text-white">playwright install chromium</b>
+                <span className="text-slate-500"># Install nava-agent package</span>{'\n'}
+                <b className="text-white">pip install nava-agent</b>
               </pre>
             </div>
           </section>
@@ -283,13 +276,22 @@ export function DocsPage({ onNavigate, onShowToast }: DocsPageProps) {
           </section>
 
           <section id="first-mission" className="space-y-4">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Run Your First Mission</h2>
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Run NAVA</h2>
             <div className="bg-slate-950 text-slate-100 rounded-xl p-4 font-mono text-xs border border-slate-800">
+              <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400">
+                <span>Terminal / Command Line</span>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard('nava', 'run-cmd')}
+                  className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer text-[11px]"
+                >
+                  {copiedCodeId === 'run-cmd' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+                  <span>{copiedCodeId === 'run-cmd' ? 'Copied' : 'Copy'}</span>
+                </button>
+              </div>
               <pre className="text-slate-300">
-                <span className="text-slate-500"># Launch interactive shell</span>{'\n'}
-                <b className="text-indigo-400">nava</b>{'\n\n'}
-                <span className="text-slate-500"># Or execute autonomous task directly</span>{'\n'}
-                <b className="text-indigo-400">nava run "Audit current git repo for secret leaks and policy violations"</b>
+                <span className="text-slate-500"># Launch personal agent OS</span>{'\n'}
+                <b className="text-indigo-400">nava</b>
               </pre>
             </div>
           </section>
@@ -782,7 +784,7 @@ security_switches:
           </span>
 
           <span className="hidden md:inline-flex px-2 py-0.5 bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-mono rounded font-medium">
-            v0.3.1
+            v0.3.3
           </span>
         </div>
 
@@ -825,7 +827,7 @@ security_switches:
             className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-mono rounded-lg transition-colors flex items-center gap-1.5 font-semibold"
           >
             <Terminal size={13} className="text-emerald-600" />
-            <span>PyPI v0.3.1</span>
+            <span>PyPI v0.3.3</span>
           </a>
 
           <a

@@ -39,7 +39,7 @@ export function DownloadSection({ onOpenBlueprint, onShowToast }: DownloadSectio
             rel="noopener noreferrer"
             className="cursor-pointer flex items-center gap-1.5 text-slate-300 hover:text-white font-medium text-sm transition-colors"
           >
-            <span>View on PyPI (v0.3.1)</span>
+            <span>View on PyPI (v0.3.3)</span>
             <ExternalLink size={14} />
           </a>
 

@@ -25,7 +25,7 @@ export function Footer({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <span>nava-agent v0.3.1 on PyPI</span>
+            <span>nava-agent v0.3.3 on PyPI</span>
           </a>
 
           <span className="text-slate-300 hidden sm:inline">•</span>

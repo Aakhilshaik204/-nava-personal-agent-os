@@ -64,7 +64,7 @@ export function Navbar({ onOpenBlueprint, onOpenDocs, onOpenLicense, onShowToast
           className="field-version !text-xs !font-mono !px-2.5 !py-1 hover:!bg-slate-200 transition-colors"
           title="View nava-agent on PyPI"
         >
-          v0.3.1
+          v0.3.3
         </a>
 
         <button

@@ -37,74 +37,137 @@ interface PipelineStage {
 
 const GATEWAY_PIPELINE_STAGES: PipelineStage[] = [
   {
+    step: '00a',
+    name: 'Emergency Kill Switch Check',
+    code: 'assert not KillSwitch.is_tripped()',
+    description: 'Verifies out-of-band kill switch is not tripped before admitting mutation.',
+    invariant: 'Invariant 18: Emergency Kill Switch',
+  },
+  {
+    step: '00b',
+    name: 'Request Event Audit Log',
+    code: 'emit(EVENT_TOOL_REQUESTED, tool_payload)',
+    description: 'Emits immutable pre-flight request event to the append-only ledger.',
+    invariant: 'Invariant 02: Append-Only Ledger',
+  },
+  {
     step: '01',
-    name: 'Identity & Origin Validation',
-    code: 'verify_signature(caller_id, parent_nonce)',
-    description: 'Ensures mutation request originates from an authentic, registered sub-agent.',
+    name: 'Strict Schema Type Validation',
+    code: 'validate_json_schema(args, tool.manifest)',
+    description: 'Enforces rigorous argument typing; rejects malformed payloads.',
     invariant: 'Invariant 01: Gateway-Only Mutation',
   },
   {
     step: '02',
-    name: 'Strict Schema Type Check',
-    code: 'validate_json_schema(tool.args, tool.manifest)',
-    description: 'Enforces rigorous typing; rejects malformed or unexpected arguments.',
+    name: 'Agent Identity Check',
+    code: 'verify_signature(caller_id, parent_nonce)',
+    description: 'Ensures request originates from an authentic, registered sub-agent.',
     invariant: 'Invariant 01: Gateway-Only Mutation',
   },
   {
     step: '03',
-    name: 'Hierarchical Scope Confinement',
-    code: 'scope(child) ⊆ scope(parent) ∩ policy',
-    description: 'Agents can reduce their authority, never expand it.',
-    invariant: 'Invariant 02: Non-Increasing Scope',
+    name: 'Agent TTL & Expiry',
+    code: 'assert now() - spawn_time < 300s',
+    description: 'Enforces strict 5-minute agent lifetime ceiling and execution window.',
+    invariant: 'Invariant 08: Ephemeral Lifetime',
   },
   {
     step: '04',
+    name: 'Hierarchical Scope Confinement',
+    code: 'scope(child) ⊆ scope(parent) ∩ policy',
+    description: 'Agents can reduce their authority, never expand it.',
+    invariant: 'Invariant 05: Non-Increasing Scope',
+  },
+  {
+    step: '05',
+    name: 'Permission Checker',
+    code: 'assert tool.name in agent.granted_tools',
+    description: 'Verifies requested tool exists in explicit agent grant permissions.',
+    invariant: 'Invariant 21: Scope Alignment',
+  },
+  {
+    step: '06',
     name: 'Declarative Policy Evaluation',
     code: 'decision = eval_policy(action, user_rules)',
     description: 'Deterministic rule engine decides ALLOW / PROMPT / BLOCK.',
     invariant: 'Invariant 03: Deterministic Decision',
   },
   {
-    step: '05',
-    name: 'Mathematical Risk Scoring',
+    step: '07',
+    name: 'Additive Risk Scoring Engine',
     code: 'risk = max(tool.risk, path.risk, blast_radius)',
     description: 'Calculates upper-bound blast radius on system and network resources.',
-    invariant: 'Invariant 12: Deterministic Risk Scoring',
-  },
-  {
-    step: '06',
-    name: 'Token & Compute Quota Check',
-    code: 'tokens_used + estimated ≤ quota_cap',
-    description: 'Prevents resource exhaustion or unexpected runaway costs.',
-    invariant: 'Invariant 18: Resource Quota Ceiling',
-  },
-  {
-    step: '07',
-    name: 'Exclusive Resource Locking',
-    code: 'acquire_write_lock(target_path, timeout=5s)',
-    description: 'Prevents race conditions; parallel agents cannot overwrite shared files.',
-    invariant: 'Invariant 04: Write-Exclusive Locks',
+    invariant: 'Invariant 15: Additive Risk Scoring',
   },
   {
     step: '08',
-    name: 'Ephemeral Credential Broker',
-    code: 'lease_token(tool, ttl=60s, model_view=NULL)',
-    description: 'Injects short-lived credentials directly into tool process without exposing to LLM context.',
-    invariant: 'Invariant 05: Credential Non-Exposure',
+    name: 'Token & Compute Quota Engine',
+    code: 'tokens_used + estimated ≤ quota_cap',
+    description: 'Prevents resource exhaustion or unexpected runaway costs.',
+    invariant: 'Invariant 06: Resource Quota Ceiling',
   },
   {
     step: '09',
-    name: 'Human Authority Sign-Off Gate',
-    code: 'if risk >= HIGH: wait_human_approval()',
-    description: 'High-impact mutations pause for explicit out-of-band user authorization.',
-    invariant: 'Invariant 06: Human Authority Gate',
+    name: 'Concurrency Lock Manager',
+    code: 'acquire_write_lock(target_path, timeout=5s)',
+    description: 'Prevents race conditions; parallel agents cannot overwrite shared files.',
+    invariant: 'Invariant 09: Write-Exclusive Locks',
   },
   {
     step: '10',
-    name: 'Cryptographic Receipt Ledger',
-    code: 'hash = SHA256(action_data || prev_hash)',
+    name: 'Ephemeral Credential Broker',
+    code: 'lease_token(tool, ttl=300s, model_view=NULL)',
+    description: 'Injects short-lived credentials directly into tool without exposing to LLM context.',
+    invariant: 'Invariant 08: Credential Non-Exposure',
+  },
+  {
+    step: '11',
+    name: 'HITL Human Authority Gate',
+    code: 'if risk >= HIGH: wait_human_approval()',
+    description: 'High-impact mutations pause for explicit out-of-band user authorization.',
+    invariant: 'Invariant 14: Human Authority Gate',
+  },
+  {
+    step: '12',
+    name: 'Dry-Run & Pre-State Snapshot',
+    code: 'snapshot.before = StateObserver.capture()',
+    description: 'Captures pre-mutation SHA-256 state hashes for automatic transactional rollback.',
+    invariant: 'Invariant 11: Transactional Rollback',
+  },
+  {
+    step: '13',
+    name: 'Sandboxed Tool Execution',
+    code: 'result = sandbox.execute(tool, scoped_token)',
+    description: 'Executes tool inside boundary-enforced sandbox or isolated JSON-RPC MCP server.',
+    invariant: 'Invariant 01: Sandboxed Execution',
+  },
+  {
+    step: '14',
+    name: 'State Observation & Hash',
+    code: 'snapshot.after = StateObserver.capture()',
+    description: 'Records post-execution file hashes, exit codes, and output payloads.',
+    invariant: 'Invariant 01: State Integrity',
+  },
+  {
+    step: '15',
+    name: 'Post-Execution Verification',
+    code: 'verify_invariants(snapshot, result)',
+    description: 'Verifies mutation integrity and compliance against 21 certified invariants.',
+    invariant: 'Invariant 21: Invariant Proof Checks',
+  },
+  {
+    step: '16',
+    name: 'Cryptographic AI Receipt',
+    code: 'ledger.append(Receipt.generate(action, result))',
     description: 'Generates immutable signed receipt committed to append-only local SQLite ledger.',
-    invariant: 'Invariant 07: Receipts and Ledger',
+    invariant: 'Invariant 03: Immutable AI Receipts',
+  },
+  {
+    step: '17',
+    name: 'Lock Release & Teardown',
+    code: 'release_all_locks(); sync_episodic_memory()',
+    description: 'Releases concurrency locks, revokes temporary tokens, and syncs episodic memory.',
+    invariant: 'Invariant 16: Deterministic Teardown',
   },
 ];
 
@@ -126,7 +189,7 @@ const SAMPLE_REQUESTS: ToolRequest[] = [
     args: 'path: "src/profile/bio.md"',
     risk: 'LOW',
     type: 'Read-Only Local',
-    passThroughStage: 10,
+    passThroughStage: 19,
     outcome: 'ALLOWED',
     outcomeReason: 'Safe read-only operation inside pre-approved workspace bounds.',
   },
@@ -136,7 +199,7 @@ const SAMPLE_REQUESTS: ToolRequest[] = [
     args: 'repo: "nava-os/core", branch: "feat/ffi"',
     risk: 'HIGH',
     type: 'External Mutation',
-    passThroughStage: 9,
+    passThroughStage: 13,
     outcome: 'PROMPTED',
     outcomeReason: 'External repository mutation requires explicit human sign-off before dispatch.',
   },
@@ -146,7 +209,7 @@ const SAMPLE_REQUESTS: ToolRequest[] = [
     args: 'path: "/home/user/projects/legacy"',
     risk: 'CRITICAL',
     type: 'Destructive Mutation',
-    passThroughStage: 9,
+    passThroughStage: 13,
     outcome: 'PROMPTED',
     outcomeReason: 'Irreversible file deletion triggers high-risk double confirmation gate.',
   },
@@ -156,7 +219,7 @@ const SAMPLE_REQUESTS: ToolRequest[] = [
     args: 'recipients: 150, template: "invite.html"',
     risk: 'CRITICAL',
     type: 'Un-scoped Network Broadcast',
-    passThroughStage: 4,
+    passThroughStage: 8,
     outcome: 'BLOCKED',
     outcomeReason: 'Policy Engine rejected: Sub-agent scope restricted from bulk mail broadcast.',
   },
@@ -166,7 +229,7 @@ const SAMPLE_REQUESTS: ToolRequest[] = [
     args: 'target: "~/.nava/backups/ledger_2026.db"',
     risk: 'LOW',
     type: 'Local Persistence',
-    passThroughStage: 10,
+    passThroughStage: 19,
     outcome: 'ALLOWED',
     outcomeReason: 'Automated local backup verified and committed with cryptographic receipt.',
   },
@@ -178,7 +241,7 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
   // Gateway Simulator State
   const [selectedRequestId, setSelectedRequestId] = useState('req_git');
   const [evaluating, setEvaluating] = useState(false);
-  const [currentEvalStep, setCurrentEvalStep] = useState(10);
+  const [currentEvalStep, setCurrentEvalStep] = useState(19);
 
   const selectedRequest = SAMPLE_REQUESTS.find((r) => r.id === selectedRequestId) ?? SAMPLE_REQUESTS[0];
 
@@ -193,14 +256,14 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
           setEvaluating(false);
           onShowToast(
             `Gateway Decision: ${selectedRequest.outcome}`,
-            `${selectedRequest.tool} evaluated through 10-point pipeline.`,
+            `${selectedRequest.tool} evaluated through 17-step pipeline.`,
             selectedRequest.outcome === 'ALLOWED' ? 'success' : selectedRequest.outcome === 'PROMPTED' ? 'warning' : 'info'
           );
           return selectedRequest.passThroughStage;
         }
         return prev + 1;
       });
-    }, 240);
+    }, 160);
   };
 
   return (
@@ -274,7 +337,7 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
           </button>
         </div>
 
-        {/* Tab 1: Deep Dive 10-Point Action Gateway (Pure Minimalist White Theme) */}
+        {/* Tab 1: Deep Dive 17-Step Action Gateway (Pure Minimalist White Theme) */}
         {activeTab === 'gateway' && (
           <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-xs">
             {/* Header & Simulator Controls */}
@@ -284,7 +347,7 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
                   Deterministic Pipeline Visualizer
                 </span>
                 <h3 className="text-xl font-bold text-slate-950 tracking-tight mt-0.5">
-                  10-Stage Verification Pipeline
+                  17-Stage Verification Pipeline
                 </h3>
               </div>
 
@@ -361,8 +424,8 @@ export function ProductSurfaces({ onShowToast, onOpenBlueprint }: ProductSurface
               </div>
             </div>
 
-            {/* Minimalist White 10-Point Pipeline Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 my-5">
+            {/* Minimalist White 17-Point Pipeline Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 my-5">
               {GATEWAY_PIPELINE_STAGES.map((stage, idx) => {
                 const stageNum = idx + 1;
                 const isPassed = currentEvalStep > stageNum;

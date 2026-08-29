@@ -564,38 +564,12 @@ nava
 
 ---
 
-### 2. Installation Options
+### 2. Installation
 
-#### Option A: Install from PyPI (Recommended)
-You can install NAVA directly as a Python package or standalone CLI tool:
+Install directly from PyPI:
 
 ```bash
-# Using standard pip
 pip install nava-agent
-
-# Or as an isolated global tool with pipx
-pipx install nava-agent
-
-# Install Playwright browser dependencies
-playwright install chromium
-```
-
-#### Option B: Install from Source (Developer Setup)
-```bash
-# Clone the repository
-git clone https://github.com/Aakhilshaik204/nava-agent.git
-cd nava-agent
-
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: .\venv\Scripts\activate
-
-# Install in editable mode
-pip install -e .
-pip install -r requirements.txt
-
-# Install Playwright browser binaries
-playwright install chromium
 ```
 
 ---
@@ -620,14 +594,9 @@ NAVA_ENV=development
 
 ### 4. Launching the Operating System
 
-If installed via PyPI/pipx, launch from any directory using the global `nava` command:
+Launch from any directory using the global command:
 ```bash
 nava
-```
-
-Or run the interactive shell directly from the repository:
-```bash
-python nava_shell.py
 ```
 
 ---

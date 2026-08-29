@@ -9,11 +9,11 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
-    const commands = `pip install nava-agent\nnava --help\nnava run "audit workspace security"`;
+    const commands = `pip install nava-agent\nnava`;
     try {
       await navigator.clipboard.writeText(commands);
       setCopied(true);
-      onShowToast('Commands copied to clipboard', 'Ready to run in terminal: pip install nava-agent', 'success');
+      onShowToast('Commands copied to clipboard', 'Ready to run in terminal: pip install nava-agent && nava', 'success');
       setTimeout(() => setCopied(false), 1800);
     } catch {
       onShowToast('Copy unavailable', 'Run: pip install nava-agent in your terminal.', 'warning');
@@ -60,7 +60,7 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
             <div className="flex items-center gap-1.5">
               <b>nava / terminal cli</b>
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-semibold">
-                v0.3.1 PyPI
+                v0.3.3 PyPI
               </span>
             </div>
             <button type="button" onClick={handleCopy} className="cursor-pointer" title="Copy CLI Commands">
@@ -74,14 +74,9 @@ export function DeveloperSurfaces({ onShowToast }: DeveloperSurfacesProps) {
             <b>$</b> pip install nava-agent
             <br />
             <br />
-            <span># 2. Inspect available commands & agents</span>
+            <span># 2. Launch personal agent OS</span>
             <br />
-            <b>$</b> nava --help
-            <br />
-            <br />
-            <span># 3. Execute deterministic autonomous mission</span>
-            <br />
-            <b>$</b> nava run "audit workspace security"
+            <b>$</b> nava
             <br />
             <br />
             <em>✓ action gateway armed • 21 invariants enforced</em>
